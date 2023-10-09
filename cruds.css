@@ -1,0 +1,43 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.cruds{
+  width: 80%;
+  margin: auto;
+}
+#head{
+text-align: center;
+text-transform: uppercase;
+color: brown;
+}
+
+input{
+  width: 100%;
+  padding: 6px;
+  margin: 10px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 2px;
+  color: rgb(180, 183, 10);
+  box-shadow: 5px  5px 5px 5px red;
+}
+#input input{
+  width: 17%;
+}
+#button {
+  display: flex;
+  justify-content: center;
+  
+}
+table{
+  width: 100%;
+}
+.headtable{
+  text-transform: uppercase;
+}
+input:hover{
+  background-color: rgb(9, 255, 247);
+  transform: scale(1.0);
+}
