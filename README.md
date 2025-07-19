@@ -4,9 +4,11 @@ A modern, responsive web application for managing products with full CRUD (Creat
 
 ## 🖼️ Screenshot
 
-![CRUD Product Management System](https://via.placeholder.com/3840x2160/1e3c72/ffffff?text=CRUD+Product+Management+System)
+<div align="center">
+  <img src="imgscreen.png" alt="CRUD Product Management System Interface" width="800" />
+</div>
 
-*4K Screenshot showing the complete CRUD Product Management System interface with dark theme, yellow headers, and responsive product table.*
+*Screenshot showing the complete CRUD Product Management System interface with dark theme, yellow headers, and responsive product table displaying product management functionality.*
 
 ## 🚀 Features
 
