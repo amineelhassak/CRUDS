@@ -1,18 +1,18 @@
 document.getElementById(
   "button"
-).innerHTML = `<input type="button" value="search by title" id="searchtitle" onclick="seearch('searchtitle')">
-        <input type="button" value="search by category" id="searchcategory" onclick="seearch('searchcategory')">`;
+).innerHTML = `<input type="button" value="Search by Title" id="searchtitle" onclick="search('searchtitle')">
+        <input type="button" value="Search by Category" id="searchcategory" onclick="search('searchcategory')">`;
 document.getElementById("head").innerHTML = 
-        `<h1>cruds</h1>
-        <h2>hhhhhhhh</h2>`;
-document.getElementById("x").innerHTML = `<input type="number" placeholder="count" id="count">
-    <input type="text" placeholder="category" id="category">
-    <input type="button" value="create" id="create">`;
-document.getElementById("input").innerHTML = `<input type="text" name="" id="price" placeholder="price" onkeyup="gettotal()" >
-        <input type="text" name="" id="taxs" placeholder="taxs" onkeyup="gettotal()">
-        <input type="text" id="ads" placeholder="ads" onkeyup="gettotal()">
-        <input type="text" id="discount" placeholder="discount" onkeyup="gettotal()">
-        <span id="totall">Totale :</span>
+        `<h1>CRUD Product Management System</h1>
+        <h2>Create, Read, Update, Delete Products</h2>`;
+document.getElementById("x").innerHTML = `<input type="number" placeholder="Count" id="count">
+    <input type="text" placeholder="Category" id="category">
+    <input type="button" value="Create" id="create">`;
+document.getElementById("input").innerHTML = `<input type="text" name="" id="price" placeholder="Price" onkeyup="gettotal()" >
+        <input type="text" name="" id="taxs" placeholder="Taxes" onkeyup="gettotal()">
+        <input type="text" id="ads" placeholder="Ads" onkeyup="gettotal()">
+        <input type="text" id="discount" placeholder="Discount" onkeyup="gettotal()">
+        <span id="totall">Total :</span>
         <span id="totale">0000</span>`;
 let title = document.getElementById("title");
 let price = document.getElementById("price");
@@ -38,7 +38,7 @@ let result;
 document.body.style.background = "black";
 document.body.style.color = "white";
 document.body.style.fontFamily ="'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif";
-// get totale
+// get total
 function gettotal() {
     if (price.value != "") {
         result = ((+price.value) + (+taxs.value) + (+ads.value )- (+discount.value));
@@ -54,7 +54,7 @@ function gettotal() {
     }
 }
 
-//delecler array data 
+//declare array data 
 let datas;
 if (localStorage.user != null) {
     // Retrieve the stored object
@@ -65,25 +65,25 @@ else
     datas = [];
 }
 // function delete element 
-deletUique = (ele) => {
+deleteUnique = (ele) => {
     datas.splice(ele, 1);
     localStorage.user = JSON.stringify(datas);
     showdata();
-    AddbuttonDeletAll();
+    addButtonDeleteAll();
 };
 // show data
 showdata = () => {
     let tab = `<tr class="headtable">
-        <th>id</th>
-        <th>title</th>
-        <th>price</th>
-        <th>taxes</th>
-        <th>ads</th>
-        <th>discount</th>
-        <th>total</th>
-        <th>category</th>
-        <th>update</th>
-        <th>delete</th>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Taxes</th>
+        <th>Ads</th>
+        <th>Discount</th>
+        <th>Total</th>
+        <th>Category</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>`;
     for (let i = 0; i < datas.length; i++)
     {
@@ -91,13 +91,13 @@ showdata = () => {
             <th>${+i+1}</th>
             <th>${datas[i].title}</th>
             <th>${+datas[i].price}</th>
+            <th>${+datas[i].taxs}</th>
             <th>${+datas[i].ads}</th>
             <th>${+datas[i].discount}</th>
-            <th>${+datas[i].taxs}</th>
-            <th>${result}</th>
+            <th>${datas[i].total}</th>
             <th>${datas[i].category}</th>
-            <th><input type="button" onclick="updite(${i})" value="updite"></th>
-            <th><input onclick="deletUique(${i})" type="button" value="delete"></th>
+            <th><input type="button" onclick="update(${i})" value="Update"></th>
+            <th><input onclick="deleteUnique(${i})" type="button" value="Delete"></th>
         </tr>`;
     }
     table.innerHTML = tab;
@@ -105,7 +105,7 @@ showdata = () => {
 showdata();
 
 // clean data
-cleandata = () => {
+cleanData = () => {
     title.value = "";
     price.value = "";
     taxs.value = "";
@@ -116,8 +116,8 @@ cleandata = () => {
     category.value = "";
 }
 
-// save informations d'oject in object in array
-SaveDataObjectInArray = () => {
+// save informations object in object in array
+saveDataObjectInArray = () => {
     let newprod = {
         title: title.value,
         price: price.value,
@@ -142,46 +142,46 @@ SaveDataObjectInArray = () => {
         }
     else
         {
-            // updite data
+            // update data
             datas[tmp] = newprod;
-            create.value = "create";
+            create.value = "Create";
             count.style.display="block"
             mod = 0;
         }
 }
 
 create.onclick = () => {
-    SaveDataObjectInArray();
+    saveDataObjectInArray();
     localStorage.setItem("user", JSON.stringify(datas));
     showdata();
-    AddbuttonDeletAll();
-    cleandata(); 
+    addButtonDeleteAll();
+    cleanData(); 
 }
 
 
 // function delete all
-DeleteAll=()=> {
+deleteAll=()=> {
     datas.splice(0);
     // remove all elements
     localStorage.clear();
     showdata();
-    AddbuttonDeletAll();
+    addButtonDeleteAll();
 };
 
 // add button delete all
-AddbuttonDeletAll = () => {
+addButtonDeleteAll = () => {
     let x=''
     if (datas.length > 0) {
-        x = `<input type="button" ondblclick="cleandata()"  onclick="DeleteAll()" value="delete all  (${datas.length})" id="deletalle"></inpute>`;
+        x = `<input type="button" ondblclick="cleanData()"  onclick="deleteAll()" value="Delete All (${datas.length})" id="deleteAll">`;
     }
     else { x= `` };
     deleteall.innerHTML = x;
 }
-AddbuttonDeletAll();
+addButtonDeleteAll();
 
-// updite 
-updite = (e) => {
-    // affiche values 
+// update 
+update = (e) => {
+    // display values 
         title.value = datas[e].title;
         price.value= datas[e].price;
         taxs.value=datas[e].taxs;
@@ -191,27 +191,27 @@ updite = (e) => {
         gettotal();
     // display button count 
         count.style.display = "none";
-    // change value button creat  -> updite and change mod create in mode updite element
-        create.value = "updite";
+    // change value button create  -> update and change mod create in mode update element
+        create.value = "Update";
         mod = 1;
         tmp = e;
-    // scroll page a lettile
+    // scroll page a little
     scroll({
         top: 0,
         behavior: "smooth",
     });
 }
 
-//  serach elements 
+//  search elements 
 
 // select mode(mode category or title)
-seearch = (id) => {
+search = (id) => {
     if (id == "searchcategory") {
-        search.placeholder = "search by category";
+        search.placeholder = "Search by category";
         modsearch = 'c';
         console.log(id);
     } else {
-        search.placeholder = "search by title";
+        search.placeholder = "Search by title";
         modsearch = 't';
     }
     search.focus();
@@ -223,48 +223,75 @@ x= (value) => {
     let tabb = "";
     if (modsearch == 't')
     {
+        tabb = `<tr class="headtable">
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Taxes</th>
+            <th>Ads</th>
+            <th>Discount</th>
+            <th>Total</th>
+            <th>Category</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>`;
         for(let i = 0; i < datas.length; i++)
         {
-            if (datas[i].title.includes(value))
+            if (datas[i].title.toLowerCase().includes(value.toLowerCase()))
             {
                 tabb += `<tr>
-                <th>${+i}</th>
+                <th>${+i+1}</th>
                 <th>${datas[i].title}</th>
                 <th>${+datas[i].price}</th>
+                <th>${+datas[i].taxs}</th>
                 <th>${+datas[i].ads}</th>
                 <th>${+datas[i].discount}</th>
-                <th>${+datas[i].taxs}</th>
-                <th>${gettotal()}</th>
+                <th>${datas[i].total}</th>
                 <th>${datas[i].category}</th>
-                <th><input type="button" onclick="updite(${i})" value="updite"></th>
-                <th><input onclick="deletUique(${i})" type="button" value="delete"></th>
+                <th><input type="button" onclick="update(${i})" value="Update"></th>
+                <th><input onclick="deleteUnique(${i})" type="button" value="Delete"></th>
                 </tr>`;
             }
         }
     }
     else if (modsearch == "c")
     {
+        tabb = `<tr class="headtable">
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Taxes</th>
+            <th>Ads</th>
+            <th>Discount</th>
+            <th>Total</th>
+            <th>Category</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>`;
         for (let i = 0; i < datas.length; i++)
         {
-            if (datas[i].category.includes(value))
+            if (datas[i].category.toLowerCase().includes(value.toLowerCase()))
             {
                 tabb += `<tr>
-            <th>${+i}</th>
+            <th>${+i+1}</th>
             <th>${datas[i].title}</th>
             <th>${+datas[i].price}</th>
+            <th>${+datas[i].taxs}</th>
             <th>${+datas[i].ads}</th>
             <th>${+datas[i].discount}</th>
-            <th>${+datas[i].taxs}</th>
-            <th>${gettotal()}</th>
+            <th>${datas[i].total}</th>
             <th>${datas[i].category}</th>
-            <th><input type="button" onclick="updite(${i})" value="updite"></th>
-            <th><input onclick="deletUique(${i})" type="button" value="delete"></th>
+            <th><input type="button" onclick="update(${i})" value="Update"></th>
+            <th><input onclick="deleteUnique(${i})" type="button" value="Delete"></th>
             </tr>`;
             }
         }
     }
-    if (valuee = '') showdata();
-    table.innerHTML = tabb;
+    if (value == '') {
+        showdata();
+    } else {
+        table.innerHTML = tabb;
+    }
 }
 
 
