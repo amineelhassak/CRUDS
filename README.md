@@ -2,6 +2,12 @@
 
 A modern, responsive web application for managing products with full CRUD (Create, Read, Update, Delete) operations. Built with vanilla JavaScript, HTML5, and CSS3.
 
+## 🖼️ Screenshot
+
+![CRUD Product Management System](https://via.placeholder.com/3840x2160/1e3c72/ffffff?text=CRUD+Product+Management+System)
+
+*4K Screenshot showing the complete CRUD Product Management System interface with dark theme, yellow headers, and responsive product table.*
+
 ## 🚀 Features
 
 - **Create Products**: Add new products with title, price, taxes, ads, discount, and category
